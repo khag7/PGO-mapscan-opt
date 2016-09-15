@@ -896,7 +896,7 @@ def main():
                 last_time = max(spawn.encounters[0][1])
                 for en in range(1,len(spawn.encounters)):
                     first_time = min(min(spawn.encounters[en][1]) - time_4q*en, first_time)
-                    last_time = min(min(spawn.encounters[en][1]) - time_4q*en, last_time)
+                    last_time = max(max(spawn.encounters[en][1]) - time_4q*en, last_time)
 
                 if pausetime < time_1q + 1:
                     spawn.type = SPAWN_1x60
@@ -1418,7 +1418,7 @@ def main():
                                         telebot.sendMessage(chat_id=telegram, text='<b>' + notification_text + '</b>\n' + time_text, parse_mode='HTML', disable_web_page_preview='False', disable_notification='False')
                                         telebot.sendLocation(chat_id=telegram, latitude=wild.latitude, longitude=wild.longitude)
                                     except Exception as e:
-                                        print('[-] Connection Error during Telegram, error: {]'.format(e))
+                                        print('[-] Connection Error during Telegram, error: {}'.format(e))
                             if addpokemon.empty() and time.time() < nextdatwrite:
                                 time.sleep(1)
                             if addpokemon.empty() or time.time() >= nextdatwrite:
